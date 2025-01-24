@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wack a Diglett</title>
+    <link rel="stylesheet" href="./CSS/styles.css">
+</head>
+
+<body>
+    <main>
+        <div class="introGame-panel">
+            <h1>Wack a Digglet</h1>
+            <img src="./Images/Digglet-Portada.png" alt="Diglett-portada" class="img-portada">
+            <button class="startButton">Jugar</button>
+
+            <button id="modalButton" class="instructionsButton">Instrucciones</button>
+
+            <div id="introModal" class="modal">
+                <div class="modal-content">
+                    <span class="closeModal">&times;</span>
+                    <div class="instructions-panel">
+                        <h2>¡Cuidado a que golpeas!</h2>
+                        <div class="instructions-description">
+                            <article>
+                                <img src="./Images/Diglett.png" alt="Diglett" class="img-info">
+                                <p><span>Diglett</span> te otorgará un punto</p>
+                            </article>
+
+                            <article>
+                                <img src="./Images/Diglett-Alola.png" alt="Diglett-Alola" class="img-info">
+                                <p><span>Diglett de Alola</span> te restara una vida.</p>
+                            </article>
+
+                            <article>
+                                <img src="./Images/Wiglett.png" alt="Wiglett" class="img-info">
+                                <p><span>Wiglett</span> te añadirá una vida extra.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-panel">
+        </div>
+
+        <div class="gameOver-panel">
+            <h2>¡Game Over!</h2>
+            <img src="" alt="Diglet-fuerte">
+            <button class="resetButton">Volver a inicio</button>
+        </div>
+    </main>
+    <script src="src/script.js"></script>
+</body>
+
+</html>
