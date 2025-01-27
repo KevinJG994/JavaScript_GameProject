@@ -1,10 +1,10 @@
 let modal = document.getElementById("introModal");
 
-let btn = document.getElementById("modalButton");
+let modalBtn = document.getElementById("modalButton");
 
 let span = document.getElementsByClassName("closeModal")[0];
 
-btn.onclick = function () {
+modalBtn.onclick = function () {
     modal.style.display = "block";
 }
 
@@ -26,32 +26,51 @@ const gameOverPanel = document.getElementsByClassName('gameOver-panel')[0]
 
 const startButton = document.getElementById('startButton')
 const resetButton = document.getElementById('resetButton')
+let time = document.getElementById('time')
 
 startButton.onclick = () => {
     introPanel.style.display = 'none';
     gamePanel.style.display = 'flex';
-
-    if (gamePanel.style.display = 'flex') {
-        setTimeout(function () {
-            gamePanel.style.display = 'none';
-            gameOverPanel.style.display = 'flex';
-        }, 5000);
-    }
-};
+    playGame();
+}
 
 resetButton.onclick = () => {
     window.location.reload();
 };
 
+function playGame() {
+// Inicia el contador al empezar el juego
+    let counter = 30;
+    if (gamePanel.style.display = 'flex') {
+        const intervalId = setInterval(function () {
+            if (counter > 0) {
+                time.innerText = `Tiempo: ${counter}`
+            } else {
+                gamePanel.style.display = 'none';
+                gameOverPanel.style.display = 'flex';
+                clearInterval(intervalId);
+            }
 
+            if (counter < 10 && counter > 0) {
+                time.style.color = 'red'
+                time.innerText = `Tiempo: ${counter}`
+            }
 
-// let celda = document.getElementsByClassName('row')
-// let img = document.createElement("IMG")
-// img.setAttribute('src', '../Images/Diglett.png')
-// img.setAttribute('width', '200px')
+            counter--;
+        }, 1000);
+    }
 
+// Agrega el primer topo a los 3 segundos de empezar el jeugo
+    const timeoutId = setTimeout(function () {
+        let celda = document.getElementsByClassName('row');
+        let img = document.createElement("IMG");
+        img.setAttribute('src', '../Images/Diglett.png');
+        img.setAttribute('width', '150px');
 
-// if (celda.length > 0) {
-//     celda[4].appendChild(img);
-// }
+        let num = Math.floor(Math.random() * celda.length);
 
+        if (celda.length > 0) {
+            celda[num].appendChild(img);
+        }
+    }, 2000);
+};
