@@ -17,3 +17,15 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+
+// let celda = document.getElementsByClassName('row')
+// let img = document.createElement("IMG")
+// img.setAttribute('src', '../Images/Diglett.png')
+// img.setAttribute('width', '200px')
+
+
+// if (celda.length > 0) {
+//     celda[4].appendChild(img);
+// }
+
