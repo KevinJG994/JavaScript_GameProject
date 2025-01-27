@@ -1,7 +1,5 @@
 let modal = document.getElementById("introModal");
-
 let modalBtn = document.getElementById("modalButton");
-
 let span = document.getElementsByClassName("closeModal")[0];
 
 modalBtn.onclick = function () {
@@ -39,38 +37,48 @@ resetButton.onclick = () => {
 };
 
 function playGame() {
-// Inicia el contador al empezar el juego
+    // Inicia el contador al empezar el juego
     let counter = 30;
-    if (gamePanel.style.display = 'flex') {
-        const intervalId = setInterval(function () {
-            if (counter > 0) {
-                time.innerText = `Tiempo: ${counter}`
-            } else {
-                gamePanel.style.display = 'none';
-                gameOverPanel.style.display = 'flex';
-                clearInterval(intervalId);
-            }
 
-            if (counter < 10 && counter > 0) {
-                time.style.color = 'red'
-                time.innerText = `Tiempo: ${counter}`
-            }
+    const intervalId = setInterval(function () {
+        if (counter > 0) {
+            time.innerText = `Tiempo: ${counter}`
+        } else {
+            gamePanel.style.display = 'none';
+            gameOverPanel.style.display = 'flex';
+            clearInterval(intervalId);
+        }
 
-            counter--;
-        }, 1000);
-    }
+        if (counter < 10 && counter > 0) {
+            time.style.color = 'red'
+            time.innerText = `Tiempo: ${counter}`
+        }
+        counter--;
+    }, 1000);
 
-// Agrega el primer topo a los 3 segundos de empezar el jeugo
+    
+    // Agrega el primer topo a los 3 segundos de empezar el jeugo
     const timeoutId = setTimeout(function () {
         let celda = document.getElementsByClassName('row');
-        let img = document.createElement("IMG");
-        img.setAttribute('src', '../Images/Diglett.png');
-        img.setAttribute('width', '150px');
+        let diglett = document.createElement("IMG");
+        diglett.setAttribute('src', '../Images/Diglett.png');
+        diglett.setAttribute('width', '150px');
+        diglett.style.cursor = 'pointer'
 
         let num = Math.floor(Math.random() * celda.length);
 
         if (celda.length > 0) {
-            celda[num].appendChild(img);
+            celda[num].appendChild(diglett);
         }
+
+        let score = document.getElementById('score');
+        let finalScore = document.getElementById('finalScore');
+        let cont = 0;
+
+        diglett.onclick = () => {
+            cont++
+            score.innerText = `Puntuación: ${cont}`
+            finalScore.innerText = `Puntuación Final: ${cont}`
+        };
     }, 2000);
 };

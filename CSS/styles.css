@@ -233,8 +233,16 @@ button {
     color: #888888f7;
 }
 
+.finalScore {
+    font-family: "Jersey 10", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+    color: #888888f7;
+}
+
 .gameOver-panel img {
-    width: 700px;
+    width: 600px;
     margin: auto;
 }
 
