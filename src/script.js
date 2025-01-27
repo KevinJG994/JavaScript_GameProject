@@ -19,6 +19,32 @@ window.onclick = function (event) {
 }
 
 
+// Navegacion entre paneles
+const introPanel = document.getElementsByClassName('introGame-panel')[0]
+const gamePanel = document.getElementsByClassName('game-panel')[0]
+const gameOverPanel = document.getElementsByClassName('gameOver-panel')[0]
+
+const startButton = document.getElementById('startButton')
+const resetButton = document.getElementById('resetButton')
+
+startButton.onclick = () => {
+    introPanel.style.display = 'none';
+    gamePanel.style.display = 'flex';
+
+    if (gamePanel.style.display = 'flex') {
+        setTimeout(function () {
+            gamePanel.style.display = 'none';
+            gameOverPanel.style.display = 'flex';
+        }, 5000);
+    }
+};
+
+resetButton.onclick = () => {
+    window.location.reload();
+};
+
+
+
 // let celda = document.getElementsByClassName('row')
 // let img = document.createElement("IMG")
 // img.setAttribute('src', '../Images/Diglett.png')
