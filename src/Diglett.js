@@ -1,24 +1,30 @@
 class Diglett {
-    constructor(image, width) {
-        this.img = document.createElement("IMG");
-        this.img.setAttribute('src', image);
-        this.img.setAttribute('width', width);
-        this.img.style.cursor = 'pointer';
+    constructor(imageSrc, size) {
+        this.imageSrc = imageSrc;
+        this.size = size;
+        this.element = document.createElement('img');
+        this.init();
     }
 
-    appendTo(parent) {
-        parent.appendChild(this.img);
+    init() {
+        this.element.setAttribute('src', this.imageSrc);
+        this.element.setAttribute('width', this.size);
+        this.element.style.cursor = 'pointer';
     }
 
-    onClick() {
-        this.img.onclick = () => {
-            let score = document.getElementById('score');
-            let finalScore = document.getElementById('finalScore');
-            let cont = 0;
+    spawn(container) {
+        if (container) {
+            container.appendChild(this.element);
+        }
+    }
 
-            cont++
-            score.innerText = `Puntuación: ${cont}`
-            finalScore.innerText = `Puntuación Final: ${cont}`
+    onClick(callback) {
+        this.element.onclick = callback;
+    }
+
+    remove() {
+        if (this.element.parentNode) {
+            this.element.parentNode.removeChild(this.element);
         }
     }
 }

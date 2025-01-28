@@ -3,82 +3,86 @@ let modalBtn = document.getElementById("modalButton");
 let span = document.getElementsByClassName("closeModal")[0];
 
 modalBtn.onclick = function () {
-    modal.style.display = "block";
-}
+  modal.style.display = "block";
+};
 
 span.onclick = function () {
-    modal.style.display = "none";
-}
+  modal.style.display = "none";
+};
 
 window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
 
 // Navegacion entre paneles
-const introPanel = document.getElementsByClassName('introGame-panel')[0]
-const gamePanel = document.getElementsByClassName('game-panel')[0]
-const gameOverPanel = document.getElementsByClassName('gameOver-panel')[0]
+const introPanel = document.getElementsByClassName("introGame-panel")[0];
+const gamePanel = document.getElementsByClassName("game-panel")[0];
+const gameOverPanel = document.getElementsByClassName("gameOver-panel")[0];
 
-const startButton = document.getElementById('startButton')
-const resetButton = document.getElementById('resetButton')
-let time = document.getElementById('time')
+const startButton = document.getElementById("startButton");
+const resetButton = document.getElementById("resetButton");
+let time = document.getElementById("time");
 
 startButton.onclick = () => {
-    introPanel.style.display = 'none';
-    gamePanel.style.display = 'flex';
-    playGame();
-}
+  introPanel.style.display = "none";
+  gamePanel.style.display = "flex";
+  playGame();
+};
 
 resetButton.onclick = () => {
-    window.location.reload();
+  window.location.reload();
 };
+
+
+// Iniciar Juego
+let scoreLabel = document.getElementById("score");
+let finalScore = document.getElementById("finalScore");
+let celda = document.getElementsByClassName("row");
 
 function playGame() {
-    // Inicia el contador al empezar el juego
     let counter = 30;
-
-    const intervalId = setInterval(function () {
-        if (counter > 0) {
-            time.innerText = `Tiempo: ${counter}`
-        } else {
-            gamePanel.style.display = 'none';
-            gameOverPanel.style.display = 'flex';
-            clearInterval(intervalId);
-        }
-
-        if (counter < 10 && counter > 0) {
-            time.style.color = 'red'
-            time.innerText = `Tiempo: ${counter}`
-        }
-        counter--;
-    }, 1000);
-
+    let score = 0;
     
-    // Agrega el primer topo a los 3 segundos de empezar el jeugo
-    const timeoutId = setTimeout(function () {
-        let celda = document.getElementsByClassName('row');
-        let diglett = document.createElement("IMG");
-        diglett.setAttribute('src', '../Images/Diglett.png');
-        diglett.setAttribute('width', '150px');
-        diglett.style.cursor = 'pointer'
+// Iniciar el contador
+  const intervalId = setInterval(function () {
+    if (counter > 0) {
+      time.innerText = `Tiempo: ${counter}`;
+    } else {
+      gamePanel.style.display = "none";
+      gameOverPanel.style.display = "flex";
+      clearInterval(intervalId);
+      clearInterval(gameInterval);
+    }
 
-        let num = Math.floor(Math.random() * celda.length);
+    if (counter < 10 && counter > 0) {
+      time.style.color = "red";
+    }
+    counter--;
+  }, 1000);
 
-        if (celda.length > 0) {
-            celda[num].appendChild(diglett);
-        }
+  
+//   Aparecen Diglett's random
+  const gameInterval = setInterval(() => {
+    const diglett = new Diglett("../Images/Diglett.png", "150px");
+    const randomNumber = Math.floor(Math.random() * celda.length);
 
-        let score = document.getElementById('score');
-        let finalScore = document.getElementById('finalScore');
-        let cont = 0;
+    diglett.spawn(celda[randomNumber]);
 
-        diglett.onclick = () => {
-            cont++
-            score.innerText = `Puntuación: ${cont}`
-            finalScore.innerText = `Puntuación Final: ${cont}`
-        };
-    }, 2000);
-};
+    diglett.onClick(() => {
+      score++;
+      scoreLabel.innerText = `Puntuación: ${score}`;
+      finalScore.innerText = `Puntuación Final: ${score}`;
+      diglett.remove();
+    });
+
+    setTimeout(() => {
+      diglett.remove();
+    }, 1000);
+  }, 2000);
+
+  setTimeout(() => {
+    clearInterval(gameInterval);
+  }, counter * 1000);
+}
