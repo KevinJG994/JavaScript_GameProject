@@ -35,17 +35,16 @@ resetButton.onclick = () => {
   window.location.reload();
 };
 
-
 // Iniciar Juego
 let scoreLabel = document.getElementById("score");
 let finalScore = document.getElementById("finalScore");
 let celda = document.getElementsByClassName("row");
 
 function playGame() {
-    let counter = 30;
-    let score = 0;
-    
-// Iniciar el contador
+  let counter = 30;
+  let score = 0;
+
+  // Iniciar el contador
   const intervalId = setInterval(function () {
     if (counter > 0) {
       time.innerText = `Tiempo: ${counter}`;
@@ -59,23 +58,54 @@ function playGame() {
     if (counter < 10 && counter > 0) {
       time.style.color = "red";
     }
+
+    if (counter <= 0) {
+      time.innerText = `Tiempo: 0`;
+    }
+    
     counter--;
   }, 1000);
 
-  
-//   Aparecen Diglett's random
+  //   Aparecen Diglett's random
   const gameInterval = setInterval(() => {
-    const diglett = new Diglett("../Images/Diglett.png", "150px");
     const randomNumber = Math.floor(Math.random() * celda.length);
+    const randomDiglett = Math.floor(Math.random() * 3);
+    let diglett;
+
+    switch (randomDiglett) {
+      case 0:
+        diglett = new Diglett("../Images/Diglett.png", "150px");
+
+        diglett.onClick(() => {
+          score++;
+          scoreLabel.innerText = `Puntuación: ${score}`;
+          finalScore.innerText = `Puntuación Final: ${score}`;
+          diglett.remove();
+        });
+        break;
+
+      case 1:
+        diglett = new Diglett("../Images/Diglett-Alola.png", "200px");
+
+        diglett.onClick(() => {
+          counter -= 6;
+          time.innerText = `Tiempo: ${counter}`;
+          diglett.remove();
+        });
+        break;
+
+      case 2:
+        diglett = new Diglett("../Images/Wiglett.png", "150px");
+
+        diglett.onClick(() => {
+          counter += 6;
+          time.innerText = `Tiempo: ${counter}`;
+          diglett.remove();
+        });
+        break;
+    }
 
     diglett.spawn(celda[randomNumber]);
-
-    diglett.onClick(() => {
-      score++;
-      scoreLabel.innerText = `Puntuación: ${score}`;
-      finalScore.innerText = `Puntuación Final: ${score}`;
-      diglett.remove();
-    });
 
     setTimeout(() => {
       diglett.remove();

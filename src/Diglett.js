@@ -1,12 +1,12 @@
 class Diglett {
-    constructor(imageSrc, size) {
+    constructor(imageSrc, size = '150px') {
         this.imageSrc = imageSrc;
         this.size = size;
         this.element = document.createElement('img');
-        this.init();
+        this.createDiglett();
     }
 
-    init() {
+    createDiglett() {
         this.element.setAttribute('src', this.imageSrc);
         this.element.setAttribute('width', this.size);
         this.element.style.cursor = 'pointer';
