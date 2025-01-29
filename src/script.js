@@ -57,17 +57,24 @@ function playGame() {
 
     if (counter < 10 && counter > 0) {
       time.style.color = "red";
+    } else {
+      time.style.color = "white";
     }
 
     if (counter <= 0) {
       time.innerText = `Tiempo: 0`;
     }
-    
+
     counter--;
   }, 1000);
 
   //   Aparecen Diglett's random
   const gameInterval = setInterval(() => {
+    if (counter <= 0) {
+      clearInterval(gameInterval);
+      return;
+    }
+
     const randomNumber = Math.floor(Math.random() * celda.length);
     const randomDiglett = Math.floor(Math.random() * 3);
     let diglett;
@@ -111,8 +118,5 @@ function playGame() {
       diglett.remove();
     }, 1000);
   }, 2000);
-
-  setTimeout(() => {
-    clearInterval(gameInterval);
-  }, counter * 1000);
 }
+

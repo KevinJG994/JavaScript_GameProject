@@ -1,5 +1,5 @@
 class Diglett {
-    constructor(imageSrc, size = '150px') {
+    constructor(imageSrc, size) {
         this.imageSrc = imageSrc;
         this.size = size;
         this.element = document.createElement('img');
