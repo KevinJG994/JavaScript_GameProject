@@ -14,6 +14,8 @@ let scoreLabel = document.getElementById("score");
 let finalScore = document.getElementById("finalScore");
 let celda = document.getElementsByClassName("row");
 
+
+//Mostrar modal
 modalBtn.onclick = function () {
   modal.style.display = "block";
 };
@@ -28,31 +30,67 @@ window.onclick = function (event) {
   }
 };
 
+
+//Funcionalidad de banda sonora
 let introSound;
 let gameSound;
 
-introSound = new Audio('./Music/main_theme.mp3')
-introSound.volume = 0.05
-introSound.play();
+function playSoundTrack() {
+  introSound = new Audio('./Music/main_theme.mp3')
+  introSound.volume = 0.05
+  introSound.play();
+}
 
-// Navegacion entre paneles
-startButton.onclick = () => {
-  introPanel.style.display = "none";
-  gamePanel.style.display = "flex";
-  playGame();
+function stopSoundTack() {
+  introSound.pause();
+}
+
+function playGameTrack() {
   gameSound = new Audio('./Music/game_theme.mp3')
   gameSound.volume = 0.04;
   gameSound.play();
-  introSound.pause();
+}
+
+function stopGameTrack() {
+  gameSound.pause()
+}
+
+playSoundTrack()
+
+
+// Mostrar las vistas
+function viewIntro() {
+  window.location.reload();
+}
+
+function viewGame() {
+  introPanel.style.display = "none";
+  gamePanel.style.display = "flex";
+  playGameTrack()
+  stopSoundTack()
+}
+
+function viewGameOver() {
+  gamePanel.style.display = "none";
+  gameOverPanel.style.display = "flex";
+  stopGameTrack()
+  playSoundTrack()
+}
+
+
+// Navegacion entre paneles
+startButton.onclick = () => {
+  viewGame();
+  startGame();
 };
 
 resetButton.onclick = () => {
-  window.location.reload();
+  viewIntro();
 };
 
 
 // Iniciar Juego
-function playGame() {
+function startGame() {
   let counter = 30;
   let score = 0;
 
@@ -61,10 +99,7 @@ function playGame() {
     if (counter > 0) {
       time.innerText = `Tiempo: ${counter}`;
     } else {
-      gamePanel.style.display = "none";
-      gameOverPanel.style.display = "flex";
-      gameSound.pause()
-      introSound.play()
+      viewGameOver();
       clearInterval(intervalId);
       clearInterval(gameInterval);
     }
