@@ -31,7 +31,7 @@ window.onclick = function (event) {
 let introSound;
 let gameSound;
 
-introSound = new Audio('../Music/main_theme.mp3')
+introSound = new Audio('./Music/main_theme.mp3')
 introSound.volume = 0.05
 introSound.play();
 
@@ -40,7 +40,7 @@ startButton.onclick = () => {
   introPanel.style.display = "none";
   gamePanel.style.display = "flex";
   playGame();
-  gameSound = new Audio('../Music/game_theme.mp3')
+  gameSound = new Audio('./Music/game_theme.mp3')
   gameSound.volume = 0.04;
   gameSound.play();
   introSound.pause();
@@ -109,10 +109,10 @@ function playGame() {
 
       switch (true) {
         case (randomDiglett < 6):
-          diglett = new Diglett("../Images/Diglett.png", "150px");
+          diglett = new Diglett("./Images/Diglett.png", "150px");
 
           diglett.onClick(() => {
-            const diglettAudio = new Audio('../Music/diglett_sound.mp3');
+            const diglettAudio = new Audio('./Music/diglett_sound.mp3');
             diglettAudio.play();
 
             score += 10;
@@ -123,10 +123,10 @@ function playGame() {
           break;
 
         case (randomDiglett < 8):
-          diglett = new Diglett("../Images/Diglett-Alola.png", "200px");
+          diglett = new Diglett("./Images/Diglett-Alola.png", "200px");
 
           diglett.onClick(() => {
-            const alolanAudio = new Audio('../Music/alolan_sound.mp3');
+            const alolanAudio = new Audio('./Music/alolan_sound.mp3');
             alolanAudio.play();
 
             counter -= 6;
@@ -136,10 +136,10 @@ function playGame() {
           break;
 
         case (randomDiglett < 10):
-          diglett = new Diglett("../Images/Wiglett.png", "150px");
+          diglett = new Diglett("./Images/Wiglett.png", "150px");
 
           diglett.onClick(() => {
-            const wiglettAudio = new Audio('../Music/wiglett_sound.mp3');
+            const wiglettAudio = new Audio('./Music/wiglett_sound.mp3');
             wiglettAudio.play();
 
             counter += 6;
