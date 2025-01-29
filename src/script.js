@@ -28,11 +28,22 @@ window.onclick = function (event) {
   }
 };
 
+let introSound;
+let gameSound;
+
+introSound = new Audio('../Music/main_theme.mp3')
+introSound.volume = 0.05
+introSound.play();
+
 // Navegacion entre paneles
 startButton.onclick = () => {
   introPanel.style.display = "none";
   gamePanel.style.display = "flex";
   playGame();
+  gameSound = new Audio('../Music/game_theme.mp3')
+  gameSound.volume = 0.04;
+  gameSound.play();
+  introSound.pause();
 };
 
 resetButton.onclick = () => {
@@ -52,6 +63,8 @@ function playGame() {
     } else {
       gamePanel.style.display = "none";
       gameOverPanel.style.display = "flex";
+      gameSound.pause()
+      introSound.play()
       clearInterval(intervalId);
       clearInterval(gameInterval);
     }
@@ -143,7 +156,7 @@ function playGame() {
       }, 800);
     }
   }, 2000);
-  
+
   if (counter <= 0) {
     clearInterval(gameInterval);
     return;
