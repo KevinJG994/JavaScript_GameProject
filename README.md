@@ -1,1 +1,1 @@
-https://kevinjg994.github.io/Wack-a-Diglett/
+https://kevinjg994.github.io/Whack-a-Diglett/
